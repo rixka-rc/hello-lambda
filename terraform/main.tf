@@ -28,11 +28,11 @@ module "python_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.7.1"
 
-  function_name = "python-${var.project}"
-  handler       = "lambda_function.lambda_handler"
-  runtime       = "python3.9"
+  function_name = "${var.func1_prefix}-${var.project}"
+  handler       = var.func1_handler
+  runtime       = var.func1_runtime
 
-  source_path = "../src/python"
+  source_path = var.func1_path
   publish     = true
 }
 
@@ -40,10 +40,10 @@ module "node_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.7.1"
 
-  function_name = "node-${var.project}"
-  handler       = "index.handler"
-  runtime       = "nodejs18.x"
+  function_name = "${var.func2_prefix}-${var.project}"
+  handler       = var.func2_handler
+  runtime       = var.func2_runtime
 
-  source_path = "../src/node"
+  source_path = var.func2_path
   publish     = true
 }
