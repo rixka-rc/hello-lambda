@@ -24,14 +24,26 @@ provider "aws" {
 
 # Lambda is packaged and deployed
 
-module "lambda_function" {
+module "python_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "4.7.1"
 
-  function_name = var.project
+  function_name = "python-${var.project}"
   handler       = "lambda_function.lambda_handler"
   runtime       = "python3.9"
 
-  source_path = "../src"
+  source_path = "../src/python"
+  publish     = true
+}
+
+module "node_function" {
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "4.7.1"
+
+  function_name = "node-${var.project}"
+  handler       = "index.handler"
+  runtime       = "nodejs18.x"
+
+  source_path = "../src/node"
   publish     = true
 }
