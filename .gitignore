@@ -5,3 +5,4 @@ builds/
 .terraform*
 *.tfstate
 *.tfstate.*
+*.tfvars
